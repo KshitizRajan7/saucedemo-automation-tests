@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('assertModalField', (actualValue, expectedValue) => {
+  cy.get('td').contains(actualValue).siblings('td').should('have.text', expectedValue);
+});
+
+// Custom command for login
+Cypress.Commands.add('login', (username, password) => {
+  // Visit login page (optional if already on page)
+  cy.visit('/login'); 
+
+  // Fill username and password
+  cy.get('input[name="username"]').type(username);
+  cy.get('input[name="password"]').type(password);
+
+  // Click login button
+  cy.get('button[type="submit"]').click();
+});

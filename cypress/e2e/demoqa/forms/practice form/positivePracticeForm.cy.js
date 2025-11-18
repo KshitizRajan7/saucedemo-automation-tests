@@ -1,17 +1,12 @@
-//importing the object that contains all he selectors for the form fields
-import page from '../../../pages/Practice.FormPage';
-
-// Ignoring cross-origin errors kinaki external scritps on the endpoint can throw errors
-Cypress.on('uncaught:exception', () => {
-  return false;
-});
+//importing the object that contains all the selectors for the form fields
+import page from '../../../../pages/Practice.FormPage';
 
 //grouping related test to practice form 
-describe("Practice Form", () => {
+describe("Practice Form positive", () => {
 
   //visiting the practice form page for once before all
   before(() => {
-    cy.visit("https://demoqa.com/automation-practice-form");
+    cy.visit("/automation-practice-form");
   });
 
   //testing all the filling forms and submit button
@@ -57,23 +52,25 @@ describe("Practice Form", () => {
       cy.get('.modal-content').should('be.visible');
 
       //for each field we can find table row label i.e td  and checking its sibling value
-      // Assert that the modal contains the respective data
-      assertModalField('Student Name', `${data.firstName} ${data.lastName}`);
-      assertModalField('Student Email', data.email);
-      assertModalField('Gender', 'Male');
-      assertModalField('Mobile', data.phone);
-      assertModalField('Date of Birth', data.dob);
-      assertModalField('Subjects', data.subject);
-      assertModalField('Hobbies', 'Sports');
-      assertModalField('Picture', 'dummy.png');
-      assertModalField('Address', data.address);
-      assertModalField('State and City', `${data.state} ${data.city}`);
+      // Assert that the modal contains the respective data using function from command.js
+
+      cy.assertModalField('Student Name', `${data.firstName} ${data.lastName}`);
+      cy.assertModalField('Student Email', data.email);
+      cy.assertModalField('Gender', 'Male');
+      cy.assertModalField('Mobile', data.phone);
+      cy.assertModalField('Date of Birth', data.dob);
+      cy.assertModalField('Subjects', data.subject);
+      cy.assertModalField('Hobbies', 'Sports');
+      cy.assertModalField('Picture', 'dummy.png');
+      cy.assertModalField('Address', data.address);
+      cy.assertModalField('State and City', `${data.state} ${data.city}`);
     });
   });
 });
 
 // creating function to assert the value of table row in the submission model
 // asserts that the text of the sibling matches the expected value.
-function assertModalField(label, expectedValue) {
-  cy.get('td').contains(label).siblings('td').should('have.text', expectedValue);
-}
+// not in use
+// function assertModalField(actualValue, expectedValue) {
+//   cy.get('td').contains(actualValue).siblings('td').should('have.text', expectedValue);
+// }

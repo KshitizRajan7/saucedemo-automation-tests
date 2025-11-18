@@ -4,6 +4,7 @@ const page = {
   lastName: '#lastName',
   email: '#userEmail',
   genderMale: 'label[for="gender-radio-1"]',
+  gender: '#gender-radio-1',
   phone: '#userNumber',
   dob: '#dateOfBirthInput',
   subjects: '#subjectsInput',
