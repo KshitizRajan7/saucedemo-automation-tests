@@ -6,7 +6,7 @@ describe("Practice Form positive", () => {
 
   //visiting the practice form page for once before all
   before(() => {
-    cy.visit("/automation-practice-form");
+    cy.visit(`${Cypress.env("demoUrl")}/automation-practice-form`);
   });
 
   //testing all the filling forms and submit button
