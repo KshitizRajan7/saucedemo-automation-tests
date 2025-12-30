@@ -1,10 +1,11 @@
 
-import sauceDemoPage from "../pages/sauceDemoPage"; 
-import page from "../pages/sauceDemoPage";
+import loginPage from "../pages/loginPage"; 
+import page from "../pages/loginPage";
 
 // Custom command for login for per user
 Cypress.Commands.add('login', (username, password) => {
   page.login(username, password);
+  loginPage.assertLoginResult(username);
 });
 
 // Custom logout command for per user 
@@ -17,18 +18,19 @@ Cypress.Commands.add("logout", () => {
 Cypress.Commands.add("loginAllUsers", () => {
   const password = Cypress.env("saucePassword");
 
-  cy.fixture("saucedemo").then((users) => {
+  cy.fixture("login").then((users) => {
     //using for of loop as it goes one iteration at a time, 
     //respects the order of operations, that is important for cyress
     for (const key of Object.keys(users)) {
       const username = users[key];
 
-      cy.visit(Cypress.env("sauceUrl")); // always start from login page
+      cy.visit('/'); // always start from login page
       //refactor yaha use vayo
-      sauceDemoPage.login(username, password);
-      sauceDemoPage.assertLoginResult(username);
-      sauceDemoPage.logoutIfLoggedIn();
+      loginPage.login(username, password);
+      loginPage.assertLoginResult(username);
+      loginPage.logoutIfLoggedIn();
     }
   });
+
 });
 

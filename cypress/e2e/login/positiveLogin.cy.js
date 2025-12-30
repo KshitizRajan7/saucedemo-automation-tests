@@ -1,6 +1,6 @@
 describe('Sauce Demo Login Tests', () => {
     beforeEach(() => {
-        cy.visit(`${Cypress.env("sauceUrl")}`);
+        cy.visit('/');
     })
 
     it(`should login all users`, () => {

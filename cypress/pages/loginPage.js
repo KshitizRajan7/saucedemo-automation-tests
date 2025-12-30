@@ -1,4 +1,4 @@
-class SauceDemoPage {
+class loginPage {
     // --- Login Page Elements ---
     usernameInput() {
         return cy.get("#user-name");
@@ -77,4 +77,4 @@ class SauceDemoPage {
     }
 }
 
-export default new SauceDemoPage();
+export default new loginPage();
